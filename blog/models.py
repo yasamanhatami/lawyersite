@@ -13,7 +13,7 @@ class category(models.Model):
         return self.name
 class Post(models.Model):
     id = models.IntegerField(primary_key=True)
-    image=models.ImageField(upload_to='blog/',default='blog/default.jpg')
+    image=models.ImageField(upload_to='blog/',default='blog/blog-1.jpg')
     author=models.ForeignKey(User, on_delete=models.SET_NULL,null=True)
     title=models.CharField(max_length=225)
     content=models.TextField()

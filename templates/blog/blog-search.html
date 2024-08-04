@@ -1,0 +1,11 @@
+{% load static %}
+<div class="col-md-4 sidebar">
+    <div class="sidebar-box">
+        <form class="search-form" action="{% url 'blog:search' %}" method="get">
+            <div class="form-group">
+                <span class="icon fa fa-search"></span>
+        <input placeholder="Search Posts" name="s" type="text" onfocus="this.placeholder = ''"
+            onblur="this.placeholder = 'Search Posts'">
+ 
+    </form>
+</div>

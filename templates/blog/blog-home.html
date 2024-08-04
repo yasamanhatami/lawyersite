@@ -1,5 +1,6 @@
-{% extends 'base.html'%}
+{%extends 'base.html'%}
 {%load static%}
+{% load blog_tags %}
 {%block content%}
 	<body>
 		
@@ -46,19 +47,24 @@
 		  	</ul>
 	  	</div>
 	</aside>
-
+    {% for post in posts %}
 	<div id="ftco-blog">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-6 col-lg-4">
 					<div class="blog-featured blog-entry animate-box">
-						<a href="#"><img class="img-responsive img-rounded" src="{%static 'images/blog-1.jpg' %}" alt=""></a>
-						<h2><a href="#">Far from the countries Vokalia and Consonantia</a></h2>
-						<p class="meta"><span>Jan 5, 2017</span> | <span>3 Comments</span></p>
-						<p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however</p>
+						<a href="{% url 'blog:single' post.id %}"><img class="img-responsive img-rounded" src={{post.image.url}} alt=""></a>
+						<h2><a href="{% url 'blog:single' post.id %}">{{post.title}}</a></h2>
+						{%for cat in post.category.all%}
+						<li><a href='{% url "blog:category" cat_name=cat.name %}'>{{cat.name}}</a>{% if not forloop.last %} {% endif %}</li>
+						{%endfor%}
+						<p class="view col-lg-12 col-md-12 col-6"><a href="#">{{post.counted_views}} Views</a> <span
+							class="lnr lnr-eye"></span></p>
+						<p class="meta"><span>{{post.published_date|date:'d M Y'}}</span> | <span> Comments</span></p>
+						<p>{{post.content|truncatewords:10}}</p>
 					</div>
 				</div>
-
+	{% endfor %}
 
 			</div>
 			<div class="row">

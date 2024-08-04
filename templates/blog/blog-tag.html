@@ -1,0 +1,12 @@
+
+{% load static %}
+<div class="sidebar-box">
+    <div class="categories">
+      <h3>Tag Clouds</h3>
+      <ul>
+        {% for tag in post.tags.all %}
+        <li><a href="{% url 'blog:tag' tag_name=tag.name %}">{{tag.name}}</a></li>
+        {% endfor %}
+    </ul>
+    </div>
+  </div>
