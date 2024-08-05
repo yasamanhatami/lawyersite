@@ -1,41 +1,6 @@
 {% extends 'base.html'%}
 {%load static%}
 {%block content%}
-
-	<body>
-		
-	<div class="ftco-loader"></div>
-	
-	<div id="page">
-	<nav class="ftco-nav" role="navigation">
-		<div class="top-menu">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-2">
-						<div id="ftco-logo"><a href="{%url 'website:index'%}">Lawmaker</a></div>
-					</div>
-					<div class="col-md-10 text-right menu-1">
-						<ul>
-							<li><a href="{% url 'website:index' %}">Home</a></li>
-							<li class="has-dropdown">
-								<a href="{% url 'blog:index' %}">Blog</a>
-								<ul class="dropdown">
-									<li><a href="#">Sub Menu 1</a></li>
-									<li><a href="#">Sub Menu 2</a></li>
-									<li><a href="#">Sub Menu 3</a></li>
-									<li><a href="#">Sub Menu 4</a></li>
-								</ul>
-							</li>
-							<li class="active"><a href="{%url 'website:about'%}">About</a></li>
-							<li><a href="{%url 'website:contact'%}">Contact</a></li>
-						</ul>
-					</div>
-				</div>
-				
-			</div>
-		</div>
-	</nav>
-
 	<aside id="ftco-hero" class="js-fullheight">
 		<div class="flexslider js-fullheight">
 			<ul class="slides">

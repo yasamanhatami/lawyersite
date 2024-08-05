@@ -1,37 +1,7 @@
 {% extends 'base.html'%}
 {%load static%}
 {%block content%}
-	<body>
-	<div class="ftco-loader"></div>
-	<div id="page">
-	<nav class="ftco-nav" role="navigation">
-		<div class="top-menu">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-2">
-						<div id="ftco-logo"><a href="{%url 'website:index'%}">Lawmaker</a></div>
-					</div>
-					<div class="col-md-10 text-right menu-1">
-						<ul>
-							<li><a href="{%url 'website:index'%}">Home</a></li>
-							<li class="has-dropdown">
-								<a href="{%url 'blog:index' %}">Blog</a>
-								<ul class="dropdown">
-									<li><a href="#">Sub Menu 1</a></li>
-									<li><a href="#">Sub Menu 2</a></li>
-									<li><a href="#">Sub Menu 3</a></li>
-									<li><a href="#">Sub Menu 4</a></li>
-								</ul>
-							</li>
-							<li><a href="{%url 'website:about'%}">About</a></li>
-							<li class="active"><a href="{%url 'website:contact'%}">Contact</a></li>
-						</ul>
-					</div>
-				</div>
-				
-			</div>
-		</div>
-	</nav>
+
 
 	<aside id="ftco-hero" class=" 'js-fullheight">
 		<div class="flexslider js-fullheight">
@@ -70,38 +40,45 @@
 				</div>
 				<div class="col-md-6 animate-box">
 					<h3>Send A Message</h3>
-					<form action="#">
+					<form action="{% url 'website:contact' %}" method="post">
+						{% csrf_token %}
+
 						<div class="row form-group">
 							<div class="col-md-6">
 								<!-- <label for="fname">First Name</label> -->
-								<input type="text" id="fname" class="form-control" placeholder="Your firstname">
-							</div>
-							<div class="col-md-6">
-								<!-- <label for="lname">Last Name</label> -->
-								<input type="text" id="lname" class="form-control" placeholder="Your lastname">
+								<input name="name" placeholder="Enter your name" onfocus="this.placeholder = ''"
+								onblur="this.placeholder = 'Enter your name'" class="form-control"
+								required="" type="text">
 							</div>
 						</div>
 
 						<div class="row form-group">
 							<div class="col-md-12">
-								<!-- <label for="email">Email</label> -->
-								<input type="text" id="email" class="form-control" placeholder="Your email address">
+
+								<input name="email" placeholder="Enter email address"
+								pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$"
+								onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email address'"
+								class="form-control" required="" type="email">
 							</div>
 						</div>
 
 						<div class="row form-group">
 							<div class="col-md-12">
 								<!-- <label for="subject">Subject</label> -->
-								<input type="text" id="subject" class="form-control" placeholder="Your subject of this message">
+								<input name="subject" placeholder="Enter subject" onfocus="this.placeholder = ''"
+								onblur="this.placeholder = 'Enter subject'" class="form-control"
+								 type="text">
 							</div>
 						</div>
 
 						<div class="row form-group">
 							<div class="col-md-12">
 								<!-- <label for="message">Message</label> -->
-								<textarea name="message" id="message" cols="30" rows="10" class="form-control" placeholder="Say something about us"></textarea>
-							</div>
+								<textarea class="common-textarea form-control" name="message" placeholder="Enter Messege"
+								onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Messege'"
+								required=""></textarea>							</div>
 						</div>
+						{{form.captcha}}
 						<div class="form-group">
 							<input type="submit" value="Send Message" class="btn btn-primary">
 						</div>

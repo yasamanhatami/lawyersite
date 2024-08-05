@@ -3,7 +3,7 @@ from django.shortcuts import render
 # Create your views here.
 from django.shortcuts import render
 from django.http import HttpResponse,HttpResponseRedirect,QueryDict
-from website.forms import ContactForm,NewsletterForm
+from website.forms import ContactForm
 from django.contrib import messages
 
 # Create your views here.
@@ -26,15 +26,6 @@ def contact_views (request):
         
     form=ContactForm()
     return render(request,'website/contact.html',{'form':form})
-def newsletter_views(request):
-    if request.method == 'POST':
-        form = NewsletterForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect('/')
-        else:
-            return HttpResponseRedirect('/')
-        
         
 
 def test_views(request):

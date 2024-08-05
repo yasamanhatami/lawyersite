@@ -47,6 +47,43 @@
 	<script src="{% static 'js/respond.min.js' %}"></script>
 	<![endif]-->
 	</head>
+	<body>
+		
+		<div class="ftco-loader"></div>
+		
+		<div id="page">
+		<nav class="ftco-nav" role="navigation">
+			<ul>
+				{% if request.user.is_authenticated %}
+				<li><a href="#">logged in as {{request.user.username}}</a></li>
+				<li><a href="{% url 'accounts:logout' %}">Logout</a></li>
+				{% else %}
+				<li><a href="{% url 'accounts:login' %}">Login</a></li>
+				<li><a href="{% url 'accounts:signup' %}">Signup</a></li>
+				{% endif %}
+			</ul>
+			<div class="top-menu">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-2">
+							<div id="ftco-logo"><a href="{%url 'website:index'%}">Lawmaker</a></div>
+						</div>
+						<div class="col-md-10 text-right menu-1">
+							<ul>
+								<li><a href="{%url 'website:index'%}">Home</a></li>
+			
+								<li class="has-dropdown">
+									<a href="{%url 'blog:index'%}">Blog</a>
+								</li>
+								<li><a href="{%url 'website:about'%}">About</a></li>
+								<li><a href="{%url 'website:contact'%}">Contact</a></li>
+							</ul>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+		</nav>
     {% block content %}
  
     {% endblock %}

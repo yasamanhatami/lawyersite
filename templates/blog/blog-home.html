@@ -2,32 +2,6 @@
 {%load static%}
 {% load blog_tags %}
 {%block content%}
-	<body>
-		
-	<div class="ftco-loader"></div>
-	
-	<div id="page">
-	<nav class="ftco-nav" role="navigation">
-		<div class="top-menu">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-2">
-						<div id="ftco-logo"><a href="{% url 'website:index' %}">Lawmaker</a></div>
-					</div>
-					<div class="col-md-10 text-right menu-1">
-						<ul>
-							<li><a href="{% url 'website:index' %}">Home</a></li>
-								<a href="{% url 'blog:index' %}">Blog</a>
-							<li><a href="{% url 'website:about' %}">About</a></li>
-							<li><a href="{% url 'website:contact' %}">Contact</a></li>
-						</ul>
-					</div>
-				</div>
-				
-			</div>
-		</div>
-	</nav>
-
 	<aside id="ftco-hero" class="js-fullheight">
 		<div class="flexslider js-fullheight">
 			<ul class="slides">
@@ -60,40 +34,47 @@
 						{%endfor%}
 						<p class="view col-lg-12 col-md-12 col-6"><a href="#">{{post.counted_views}} Views</a> <span
 							class="lnr lnr-eye"></span></p>
-						<p class="meta"><span>{{post.published_date|date:'d M Y'}}</span> | <span> Comments</span></p>
+						<p class="meta"><span>{{post.published_date|date:'d M Y'}}</span> | <span> {% comments_count post.id %} Comments</span></p>
 						<p>{{post.content|truncatewords:10}}</p>
 					</div>
 				</div>
 	{% endfor %}
 
 			</div>
-			<div class="row">
-				<div class="col-md-12 pagination">
-					<a href="#">1</a>
-					<a href="#">2</a>
-					<a href="#">3</a>
-					<a href="#" class="caption">Next</a>
-				</div>
+			<nav class="blog-pagination justify-content-center d-flex">
+					
+				<ul class="pagination">
+					{% if posts.has_previous %}
+					<li class="page-item">
+						<a href="?page={{ page_obj.previous_page_number }}" class="caption">
+							Previous
+							
+						</a>
+					</li>
+					{% endif %}
+					{% for i in posts.paginator.page_range %}
+					{% if posts.number == i %}
+						<li class="page-item active"><a href="?page={{i}}">{{i}}</a></li>
+					{% else %}
+						<li><a href="?page={{i}}">{{i}}</a></li>
+					{% endif %}
+					{% endfor %}
+					{% if posts.has_next %}
+					<li>
+						<a href="?page={{ posts.next_page_number }}" class="caption">
+							Next
+							
+						</a>
+					</li>
+					{% endif %}
+				</ul>
+			</nav>
 			</div>
+			
 		</div>
 	</div>
 
 
 
 	
-	<div id="intro-bg">
-		<div class="container">
-			<div id="ftco-intro" style="position: relative; margin-bottom: -150px!important;">
-				<div class="third-col">
-					<h2 class="h3">Need Legal Services?</h2>
-					<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-				</div>
-				<div class="third-col third-col-color">
-					<h2 class="h3">Call now (+1) 123-456-7890</h2>
-					<p>Email us at <a href="#" target="_blank">info@yourwebsite.com</a></p>
-					<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-				</div>
-			</div>
-		</div>
-	</div>
 {% endblock %}

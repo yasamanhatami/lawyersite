@@ -27,7 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-SITE_ID = 1
+SITE_ID = 2
 # Application definition
 
 INSTALLED_APPS = [
@@ -47,7 +47,7 @@ INSTALLED_APPS = [
     'taggit',
     'website.apps.WebsiteConfig',
     'blog',
-    #'accounts',
+    'accounts',
 ]
 # sommernote configs
 SUMMERNOTE_THEME = 'bs4' 
@@ -171,3 +171,13 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+# email configs
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'yasamanhatami047@gmail.com'
+EMAIL_HOST_PASSWORD = "vebm ifne yghn ulpk"
+
+MAINTENANCE_MODE = False

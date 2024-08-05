@@ -1,5 +1,5 @@
 from django.contrib import admin
-from website.models import Cantact,Newsletter
+from website.models import Cantact
 # Register your models here.
 
 class CantactAdmin(admin.ModelAdmin):
@@ -8,4 +8,4 @@ class CantactAdmin(admin.ModelAdmin):
     list_filter=('email',)
     search_fields=('name','message')
 admin.site.register(Cantact,CantactAdmin)
-admin.site.register(Newsletter)
+
