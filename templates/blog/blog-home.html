@@ -47,7 +47,7 @@
 					{% if posts.has_previous %}
 					<li class="page-item">
 						<a href="?page={{ page_obj.previous_page_number }}" class="caption">
-							Previous
+							<span>&#8617;</span>
 							
 						</a>
 					</li>
@@ -62,7 +62,7 @@
 					{% if posts.has_next %}
 					<li>
 						<a href="?page={{ posts.next_page_number }}" class="caption">
-							Next
+							<span>&#8618;</span>
 							
 						</a>
 					</li>

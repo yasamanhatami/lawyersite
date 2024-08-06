@@ -1,4 +1,5 @@
 {% load static %}
+{% load compress %}
 <!DOCTYPE HTML>
 <html>
 	<head>
@@ -16,8 +17,9 @@
 	<meta name="twitter:image" content="" />
 	<meta name="twitter:url" content="" />
 	<meta name="twitter:card" content="" />
-
 	<link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,700" rel="stylesheet">
+    {% compress css %}
+	
 	
 	<!-- Animate.css -->
 	<link rel="stylesheet" href="{% static 'css/animate.css' %}">
@@ -39,9 +41,11 @@
 
 	<!-- Theme style  -->
 	<link rel="stylesheet" href="{% static 'css/style.css'%}">
-
+    {% endcompress %}
 	<!-- Modernizr JS -->
+	{% compress js %}
 	<script src="{% static 'js/modernizr-2.6.2.min.js' %}"></script>
+	{% endcompress %}
 	<!-- FOR IE9 below -->
 	<!--[if lt IE 9]>
 	<script src="{% static 'js/respond.min.js' %}"></script>
@@ -87,6 +91,11 @@
     {% block content %}
  
     {% endblock %}
+	{% if messages %}
+    {% for message in messages %}
+      <div class="alert {% if message.tags %} alert-{{ message.tags }}{% endif %}">{{ message|safe }}</div>
+    {% endfor %}
+    {% endif %}
 	<footer id="ftco-footer" role="contentinfo">
 		<div class="container">
 			<div class="row row-pb-md">
@@ -148,7 +157,7 @@
 	<div class="gototop js-top">
 		<a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
 	</div>
-	
+	{% compress js %}
 	<!-- jQuery -->
 	<script src="{% static 'js/jquery.min.js' %}"></script>
 	<!-- jQuery Easing -->
@@ -170,7 +179,7 @@
 	<script src="{% static 'js/magnific-popup-options.js' %}"></script>
 	<!-- Main -->
 	<script src="{% static 'js/main.js' %}"></script>
-
+    {% endcompress %}
 	 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
 <script>

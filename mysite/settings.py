@@ -16,18 +16,7 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-pl4t$1fma1jw)yw)no%_jh^6^_v390cpc@!3()39@!x3c&soer'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
-
-SITE_ID = 2
 # Application definition
 
 INSTALLED_APPS = [
@@ -45,6 +34,7 @@ INSTALLED_APPS = [
     'django_summernote',
     'robots',
     'taggit',
+    "compressor",
     'website.apps.WebsiteConfig',
     'blog',
     'accounts',
@@ -115,15 +105,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'mysite.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
 
 
 # Password validation
@@ -162,11 +144,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 MEDIA_URL ='/media/'
-STATIC_ROOT=BASE_DIR / 'static'
-MEDIA_ROOT=BASE_DIR / 'media'
-STATICFILES_DIRS = [
-    BASE_DIR / "statics",
-]
+
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
@@ -181,3 +160,9 @@ EMAIL_HOST_USER = 'yasamanhatami047@gmail.com'
 EMAIL_HOST_PASSWORD = "vebm ifne yghn ulpk"
 
 MAINTENANCE_MODE = False
+STATICFILES_FINDERS = [
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'compressor.finders.CompressorFinder'
+]
+COMPRESS_ENABLED = True
