@@ -45,7 +45,20 @@ def blog_single(request,pid):
     post.save()
     next_post = Post.objects.filter(id__gt=pid,published_date__lte=timezone.now(),status=1).last()
     previous_post = Post.objects.filter(id__lt=pid,published_date__lte=timezone.now(),status=1).first()
-    if not post.login_require:
+    if post.login_require:
+        if request.user.is_authenticated:
+        
+            comments = Comment.objects.filter(post=post.id,approved=True)
+            form = CommentForm()
+            context={'post':post,
+                    'next_post':next_post,
+                    'previous_post':previous_post,
+                    'comments':comments,
+                    'form':form,}
+            return render(request,'blog/blog-single.html',context)
+        else:
+            return HttpResponseRedirect(reverse('accounts:login'))
+    else:
         comments = Comment.objects.filter(post=post.id,approved=True)
         form = CommentForm()
         context={'post':post,
@@ -54,16 +67,17 @@ def blog_single(request,pid):
                 'comments':comments,
                 'form':form,}
         return render(request,'blog/blog-single.html',context)
-    else:
-        return HttpResponseRedirect(reverse('accounts:login'))
+        
+        
 #def test(request):
     #posts=get_object_or_404(Post,id=pid)
     #context={'posts':posts}
     #return render(request,'test.html')
 def blog_search(request):
+
     posts=Post.objects.filter(published_date__lte=timezone.now(),status=1)
     if request.method == "GET":
-        if s:=request.GET.get('s'):
-            posts=posts.filter(content__contains=s)
+        s = request.GET.get('s')
+        posts=posts.filter(content__contains=s)
     context={'posts':posts}
     return render(request,'blog/blog-home.html',context)
