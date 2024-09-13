@@ -805,7 +805,7 @@ h1, h2, h3, h4, h5, h6, figure {
       margin-bottom: 10px; }
 
 .ftco-blog {
-  margin-bottom: 40px;
+  margin-bottom: 30px;
   width: 100%;
   float: left; }
   .ftco-blog > a {
@@ -1402,3 +1402,7 @@ h1, h2, h3, h4, h5, h6, figure {
   .post-meta a {
     color: #fff;
     border-bottom: 1px solid rgba(255, 255, 255, 0.5); }
+.right_header {
+  color: #fff;
+  float: right;
+}

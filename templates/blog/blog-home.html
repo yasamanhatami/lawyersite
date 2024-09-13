@@ -5,7 +5,7 @@
 	<aside id="ftco-hero" class="js-fullheight">
 		<div class="flexslider js-fullheight">
 			<ul class="slides">
-		   	<li style="background-image: url('http://127.0.0.1:2000/static/images/hero_1.jpg');">
+		   	<li style="background-image: url('http://127.0.0.1:8000/static/images/hero_1.jpg');">
 		   		<div class="overlay-gradient"></div>
 		   		<div class="container">
 		   			<div class="row">
@@ -23,12 +23,14 @@
 		 
 	</aside>
      
-    {% for post in posts %}
+   
 	<div id="ftco-blog">
 		
 		<div class="container">
+			
 			<div class="row">
 				<div class="col-md-6 col-lg-4">
+					{% for post in posts %}
 					<div class="blog-featured blog-entry animate-box">
 						<a href="{% url 'blog:single' post.id %}"><img class="img-responsive img-rounded" src={{post.image.url}} alt=""></a>
 						<h2><a href="{% url 'blog:single' post.id %}">{{post.title}}</a></h2>
@@ -40,18 +42,18 @@
 						<p class="meta"><span>{{post.published_date|date:'d M Y'}}</span> | <span> {% comments_count post.id %} Comments</span></p>
 						<p>{{post.content|truncatewords:10}}</p>
 					</div>
+					{% endfor %}
 				</div>
-	{% endfor %}
-
 			</div>
-			<nav class="blog-pagination justify-content-center d-flex">
-					
+			
+	
+	
+			<nav class="blog-pagination justify-content-center d-flex">		
 				<ul class="pagination">
 					{% if posts.has_previous %}
 					<li class="page-item">
 						<a href="?page={{ page_obj.previous_page_number }}" class="caption">
-							<span>&#8617;</span>
-							
+							<span>&#8617;</span>		
 						</a>
 					</li>
 					{% endif %}
@@ -65,19 +67,13 @@
 					{% if posts.has_next %}
 					<li>
 						<a href="?page={{ posts.next_page_number }}" class="caption">
-							<span>&#8618;</span>
-							
+							<span>&#8618;</span>	
 						</a>
 					</li>
 					{% endif %}
 				</ul>
 			</nav>
-			</div>
-		
 		</div>
-	</div>
+    </div>
 
-
-
-	
 {% endblock %}
